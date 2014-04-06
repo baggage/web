@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<!--
+  Miniport 2.5 by HTML5 UP
+  html5up.net | @n33co
+  Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+  <head>
+    <title>baggage.io - a simple and free web-to-email api</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,600,700" rel="stylesheet" />
+    <script src="js/jquery.min.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/skel.min.js"></script>
+    <noscript>
+      <link rel="stylesheet" href="css/skel-noscript.css" />
+      <link rel="stylesheet" href="css/style.css" />
+      <link rel="stylesheet" href="css/style-desktop.css" />
+    </noscript>
+    <script type="text/javascript" src="js/shCore.js"></script>
+    <script type="text/javascript" src="js/shBrushBash.js"></script>
+    <link type="text/css" rel="stylesheet" href="css/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+    <!--[if lte IE 9]><link rel="stylesheet" href="css/ie9.css" /><![endif]-->
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><link rel="stylesheet" href="css/ie8.css" /><![endif]-->
+    <!--[if lte IE 7]><link rel="stylesheet" href="css/ie7.css" /><![endif]-->
+  </head>
+  <body>
+
+    <!-- Nav -->
+      <nav id="nav">
+        <ul class="container">
+          <li><a href="#top">top</a></li>
+          <li><a href="#subscribe">subscribe</a></li>
+          <li><a href="#send">send</a></li>
+          <li><a href="#rotate">rotate</a></li>
+          <li><a href="#unsubscribe">unsubscribe</a></li>
+          <li><a href="#more">more</a></li>
+        </ul>
+      </nav>
+
+    <!-- Home -->
+      <div class="wrapper wrapper-style1 wrapper-first">
+        <article class="container" id="top">
+          <div class="row">
+            <div class="4u">
+              <span class="me image image-full"><img src="images/Case-icon.png" alt="" /></span>
+            </div>
+            <div class="8u">
+              <header>
+                <h1><strong>baggage.io</strong></h1>
+              </header>
+              <p>A simple and free web-to-email api</p>
+              <a href="#subscribe" class="button button-big">Getting started</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="wrapper wrapper-style2">
+        <article id="subscribe">
+          <header>
+            <h2>subscribe</h2>
+            <span>You will receive an email with your subscription tokens.</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+$ curl -is https://api.baggage.io/subscribe/you@domain.com
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 31
+
+{"message":"subscription sent"}
+</pre>
+                </section>
+              </div>
+            </div>
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+From: Baggage.io &lt;no-reply@baggage.io&gt;
+To: you@domain.com
+Subject: New Baggage.io subscription
+
+Your new subscription:
+
+id:              e189f55f616b6156227511c83756f54c
+email token:     d7073a8e087ec3e3c500c4eeee3abc841754ef8ba05d5d22c20103070046e6d4
+admin token:     5ad4addbfd944a53dfd51eb52ee5fbfaa59b9031020bddfab2e4e254b4c0c0c2
+
+rotate tokens:   http://api.baggage.io/rotate/e189f55f616b6156227511c83756f54c?token=5ad4addbfd944a53dfd51eb52ee5fbfaa59b9031020bddfab2e4e254b4c0c0c2
+unsubscribe:     http://api.baggage.io/unsubscribe/e189f55f616b6156227511c83756f54c?token=5ad4addbfd944a53dfd51eb52ee5fbfaa59b9031020bddfab2e4e254b4c0c0c2
+
+Your subscription will expire after 7 days of inactivity.
+
+send a message:
+
+http://api.baggage.io/send/e189f55f616b6156227511c83756f54c?token=d7073a8e087ec3e3c500c4eeee3abc841754ef8ba05d5d22c20103070046e6d4&subject=hello&body=world
+
+Regards,
+baggage.io
+</pre>
+                </section>
+              </div>
+            </div>
+
+          </div>
+          <footer>
+                <p>The id is unique for your subscription, and you can have as many subscriptions per email address as you like.</p>
+            <a href="#send" class="button button-big">Now send an email</a>
+          </footer>
+        </article>
+      </div>
+
+
+      <div class="wrapper wrapper-style3">
+        <article id="send">
+          <header>
+            <h2>send</h2>
+            <span>Use the id and email token</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+$ curl -is 'https://api.baggage.io/send/e189f55f616b6156227511c83756f54c?token=d7073a8e087ec3e3c500c4eeee3abc841754ef8ba05d5d22c20103070046e6d4&subject=hello&body=world'
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 18
+
+{"message":"sent"}
+</pre>
+                </section>
+              </div>
+            </div>
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+From: no-reply@baggage.io
+To: you@domain.com
+Subject: hello
+
+world
+</pre>
+                </section>
+              </div>
+            </div>
+
+          </div>
+          <footer>
+                <p>You can also use a POST request.</p>
+            <a href="#rotate" class="button button-big">Rotate the tokens</a>
+          </footer>
+        </article>
+      </div>
+
+
+
+      <div class="wrapper wrapper-style2">
+        <article id="rotate">
+          <header>
+            <h2>rotate</h2>
+            <span>Use the id and admin token to change the tokens at any time</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+$  curl -is 'https://api.baggage.io/rotate/e189f55f616b6156227511c83756f54c?token=5ad4addbfd944a53dfd51eb52ee5fbfaa59b9031020bddfab2e4e254b4c0c0c2'
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 21
+
+{"message":"rotated"}
+</pre>
+                </section>
+              </div>
+            </div>
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+From: Baggage.io &lt;no-reply@baggage.io&gt;
+To: you@domain.com
+Subject: New Baggage.io subscription
+
+Tokens have been rotated. The new values are:
+
+id:              b39f6b8d46be132c84c79b5da811e540
+email token:     c97590d4eeec34e8691037490e1325327024cd801b9b2e1518570480833a8ee0
+admin token:     2c3f59cc7209bd44d8519d1b990bfa0fdfc801eb1a25468f1d4afd42dd023728
+
+rotate tokens:   http://api.baggage.io/rotate/b39f6b8d46be132c84c79b5da811e540?token=2c3f59cc7209bd44d8519d1b990bfa0fdfc801eb1a25468f1d4afd42dd023728
+unsubscribe:     http://api.baggage.io/unsubscribe/b39f6b8d46be132c84c79b5da811e540?token=2c3f59cc7209bd44d8519d1b990bfa0fdfc801eb1a25468f1d4afd42dd023728
+
+Your subscription will expire after 7 days of inactivity.
+
+send a message:
+
+http://api.baggage.io/send/b39f6b8d46be132c84c79b5da811e540?token=c97590d4eeec34e8691037490e1325327024cd801b9b2e1518570480833a8ee0&subject=hello&body=world
+
+Regards,
+baggage.io
+</pre>
+                </section>
+              </div>
+            </div>
+
+          </div>
+          <footer>
+                <p>The id stays the same.</p>
+            <a href="#unsubscribe" class="button button-big">Unsubscribe</a>
+          </footer>
+        </article>
+      </div>
+
+
+
+      <div class="wrapper wrapper-style3">
+        <article id="unsubscribe">
+          <header>
+            <h2>unsubscribe</h2>
+            <span>Use the id and admin token to unsubscribe</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+$ curl -is 'http://localhost:4567/unsubscribe/b39f6b8d46be132c84c79b5da811e540?token=2c3f59cc7209bd44d8519d1b990bfa0fdfc801eb1a25468f1d4afd42dd023728'
+
+HTTP/1.1 200 OK
+Content-Type: application/json;charset=utf-8
+X-Content-Type-Options: nosniff
+Content-Length: 26
+
+{"message":"unsubscribed"}
+</pre>
+                </section>
+              </div>
+            </div>
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+From: Baggage.io &lt;no-reply@baggage.io&gt;
+To: you@domain.com
+Subject: Baggage.io b39f6b8d46be132c84c79b5da811e540 unsubscribed
+
+Hi,
+
+b39f6b8d46be132c84c79b5da811e540 has been unsubscribed. Thank you.
+
+Regards,
+baggage.io
+</pre>
+                </section>
+              </div>
+            </div>
+
+          </div>
+          <footer>
+                <p>The subscription will also expire after 7 days inactivity (configurable).</p>
+            <a href="#more" class="button button-big">Want to know more?</a>
+          </footer>
+        </article>
+      </div>
+
+      <div class="wrapper wrapper-style4">
+        <article id="more" class="container small">
+          <header>
+            <h2>find out more</h2>
+            <span>API documentation and source code is available <a href="">on GitHub</a></span>
+          </header>
+            <div class="row">
+              <div class="12u">
+                <hr />
+                <h3>Like the service?</h3>
+                <ul class="social">
+                  <li class="twitter"><a href="http://twitter.com/n33co" class="fa fa-twitter"><span>Twitter</span></a></li>
+                  <li class="facebook"><a href="#" class="fa fa-facebook"><span>Facebook</span></a></li>
+                  <li class="dribbble"><a href="http://dribbble.com/n33" class="fa fa-dribbble"><span>Dribbble</span></a></li>
+                  <li class="linkedin"><a href="#" class="fa fa-linkedin"><span>LinkedIn</span></a></li>
+                  <li class="tumblr"><a href="#" class="fa fa-tumblr"><span>Tumblr</span></a></li>
+                  <li class="googleplus"><a href="#" class="fa fa-google-plus"><span>Google+</span></a></li>
+                  <li class="github"><a href="http://github.com/n33" class="fa fa-github"><span>Github</span></a></li>
+                  <!--
+                  <li class="rss"><a href="#" class="fa fa-rss"><span>RSS</span></a></li>
+                  <li class="instagram"><a href="#" class="fa fa-instagram"><span>Instagram</span></a></li>
+                  <li class="foursquare"><a href="#" class="fa fa-foursquare"><span>Foursquare</span></a></li>
+                  <li class="skype"><a href="#" class="fa fa-skype"><span>Skype</span></a></li>
+                  <li class="soundcloud"><a href="#" class="fa fa-soundcloud"><span>Soundcloud</span></a></li>
+                  <li class="youtube"><a href="#" class="fa fa-youtube"><span>YouTube</span></a></li>
+                  <li class="blogger"><a href="#" class="fa fa-blogger"><span>Blogger</span></a></li>
+                  <li class="flickr"><a href="#" class="fa fa-flickr"><span>Flickr</span></a></li>
+                  <li class="vimeo"><a href="#" class="fa fa-vimeo"><span>Vimeo</span></a></li>
+                  -->
+                </ul>
+                <hr />
+              </div>
+            </div>
+          <footer>
+            <ul id="copyright">
+              <li>&copy; 2014 baggage.io</li>
+              <li>Images: <a href="http://fotogrph.com">fotogrph</a></li>
+              <li>Design: <a href="http://html5up.net/">HTML5 UP</a></li>
+            </ul>
+          </footer>
+        </article>
+      </div>
+
+
+  </body>
+</html>
