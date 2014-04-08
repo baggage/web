@@ -44,6 +44,7 @@
           <li><a href="#top">top</a></li>
           <li><a href="#subscribe">subscribe</a></li>
           <li><a href="#send">send</a></li>
+          <li><a href="#stats">stats</a></li>
           <li><a href="#rotate">rotate</a></li>
           <li><a href="#unsubscribe">unsubscribe</a></li>
           <li><a href="#more">more</a></li>
@@ -234,14 +235,48 @@ a lot easier
           </div>
           <footer>
                 <p>POST without a body parameter.</p>
-            <a href="#rotate" class="button button-big">Change the tokens</a>
+            <a href="#stats" class="button button-big">See some stats</a>
           </footer>
         </article>
       </div>
 
 
-
       <div class="wrapper wrapper-style2">
+        <article id="stats">
+          <header>
+            <h2>stats</h2>
+            <span>Use the id and admin token to view subscription statistics</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+$ curl -is 'https://api.baggage.io/stats/e098cde48b3564c0a83eaad6b37b0da0?token=38cf6bb64cbbaffb30fcb75e48a05872297579de1ac57744ac9677f3a32eda3d'
+
+HTTP/1.1 200 OK
+Server: nginx
+Date: Mon, 07 Apr 2014 13:35:59 GMT
+Content-Type: application/json;charset=utf-8
+Content-Length: 218
+Connection: keep-alive
+X-Content-Type-Options: nosniff
+
+{"message":"stats","stats":{"created":"2014-04-07 10:48:18 +0100","updated":"2014-04-07 12:49:36 +0100","sent_count":1,"subscriber_ip":"127.0.0.1","last_admin_ip":"127.0.0.1","last_sender_ip":"127.0.0.1","ttl":604797}}
+</pre>
+                </section>
+              </div>
+            </div>
+          </div>
+          <footer>
+                <p>No email is sent when retrieving stats.</p>
+            <a href="#rotate" class="button button-big">Change the tokens</a>
+          </footer>
+        </article>
+      </div>
+
+      <div class="wrapper wrapper-style3">
         <article id="rotate">
           <header>
             <h2>rotate</h2>
@@ -324,7 +359,7 @@ baggage.io
 
 
 
-      <div class="wrapper wrapper-style3">
+      <div class="wrapper wrapper-style2">
         <article id="unsubscribe">
           <header>
             <h2>unsubscribe</h2>
