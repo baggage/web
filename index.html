@@ -47,6 +47,7 @@
           <li><a href="#stats">stats</a></li>
           <li><a href="#rotate">rotate</a></li>
           <li><a href="#unsubscribe">unsubscribe</a></li>
+          <li><a href="#tool">tool</a></li>
           <li><a href="#more">more</a></li>
         </ul>
       </nav>
@@ -204,7 +205,7 @@ world
                 <div class="12u">
                 <section class="box box-style1">
 <pre class="brush: bash;">
-$ curl -is -XPOST --data-binary @message.txt 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&subject=hello'
+$ curl -is -XPOST --data-binary @message.txt -H 'Content-Type: application/octet-stream' 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&subject=hello'
 
 HTTP/1.1 200 OK
 Server: nginx
@@ -420,6 +421,54 @@ baggage.io
           </div>
           <footer>
                 <p>The subscription will also expire after 7 days inactivity (configurable).</p>
+            <a href="#cli" class="button button-big">Or just use the tool</a>
+          </footer>
+        </article>
+      </div>
+
+      <div class="wrapper wrapper-style3">
+        <article id="tool">
+          <header>
+            <h2>command line tool</h2>
+            <span>It's easy to install and use</span>
+          </header>
+          <div class="container">
+
+             <div class="row half">
+                <div class="12u">
+                <section class="box box-style1">
+<pre class="brush: bash;">
+# Get the tool
+
+$ curl -sL -o baggage http://tool.baggage.io  &amp;&amp; chmod +x baggage
+
+# Subscribe an email address
+
+$ ./baggage subscribe you@domain.com
+
+# Copy/paste the tokens from the subscription email
+
+$ touch ~/.baggage &amp;&amp; chmod 0600 ~/.baggage &amp;&amp; cat &lt;&lt;EOF &gt; ~/.baggage
+BAGGAGE_ID=e098cde48b3564c0a83eaad6b37b0da0
+BAGGAGE_EMAIL_TOKEN=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc
+EOF
+
+# Send yourself a message
+
+$ tail -100 server.log | ./baggage send "CRITICAL - something broke"
+
+# Get help
+
+$ ./baggage help
+
+</pre>
+                </section>
+              </div>
+            </div>
+
+          </div>
+          <footer>
+                <p>Copy it to /usr/bin/ for even more convinience.</p>
             <a href="#more" class="button button-big">Want to know more?</a>
           </footer>
         </article>
