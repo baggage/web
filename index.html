@@ -141,6 +141,27 @@ To unsubscribe:
 https://api.baggage.io/unsubscribe/e098cde48b3564c0a83eaad6b37b0da0?token=38cf6bb64cbbaffb30fcb75e48a05872297579de1ac57744ac9677f3a32eda3d
 
 
+Installing the baggage command line tool:
+
+curl -sL -o baggage http://tool.baggage.io && chmod +x baggage
+
+
+For normal or system users add the id and email token:
+
+touch ~/.baggage && chmod 0600 ~/.baggage && cat <<EOF > ~/.baggage
+BAGGAGE_ID=e098cde48b3564c0a83eaad6b37b0da0
+BAGGAGE_EMAIL_TOKEN=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc
+EOF
+
+For admins you can also add the admin token to the .baggage file:
+
+BAGGAGE_ADMIN_TOKEN=38cf6bb64cbbaffb30fcb75e48a05872297579de1ac57744ac9677f3a32eda3d
+
+
+Use the tool:
+
+./baggage help
+
 Your subscription will expire after 7 days of inactivity.
 
 Regards,
