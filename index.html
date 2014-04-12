@@ -44,11 +44,8 @@
           <li><a href="#top">top</a></li>
           <li><a href="#subscribe">subscribe</a></li>
           <li><a href="#send">send</a></li>
-          <li><a href="#stats">stats</a></li>
-          <li><a href="#rotate">rotate</a></li>
-          <li><a href="#unsubscribe">unsubscribe</a></li>
           <li><a href="#tool">tool</a></li>
-          <li><a href="#more">more</a></li>
+          <li><a href="#docs">docs</a></li>
         </ul>
       </nav>
 
@@ -123,7 +120,7 @@ Please keep the admin token safe.
 
 Sending a message:
 
-https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&subject=hello&body=world
+https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&amp;subject=hello&amp;body=world
 
 
 Retrieve subscription statistics:
@@ -143,12 +140,12 @@ https://api.baggage.io/unsubscribe/e098cde48b3564c0a83eaad6b37b0da0?token=38cf6b
 
 Installing the baggage command line tool:
 
-curl -sL -o baggage http://tool.baggage.io && chmod +x baggage
+curl -sL -o baggage http://tool.baggage.io &amp;&amp; chmod +x baggage
 
 
 For normal or system users add the id and email token:
 
-touch ~/.baggage && chmod 0600 ~/.baggage && cat <<EOF > ~/.baggage
+touch ~/.baggage &amp;&amp; chmod 0600 ~/.baggage &amp;&amp; cat &lt;&lt;EOF &gt; ~/.baggage
 BAGGAGE_ID=e098cde48b3564c0a83eaad6b37b0da0
 BAGGAGE_EMAIL_TOKEN=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc
 EOF
@@ -173,7 +170,7 @@ baggage.io
 
           </div>
           <footer>
-                <p>The id is unique for your subscription, and you can have as many subscriptions per email address as you like.</p>
+                <p>The id is unique  to your subscription, and you can have as many subscriptions per email address as you like.</p>
             <a href="#send" class="button button-big">Send yourself an email</a>
           </footer>
         </article>
@@ -192,7 +189,7 @@ baggage.io
                 <div class="12u">
                 <section class="box box-style1">
 <pre class="brush: bash;">
-$ curl -is 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&subject=hello&body=world'
+$ curl -is 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&amp;subject=hello&amp;body=world'
 
 HTTP/1.1 200 OK
 Server: nginx
@@ -226,7 +223,7 @@ world
                 <div class="12u">
                 <section class="box box-style1">
 <pre class="brush: bash;">
-$ curl -is -XPOST --data-binary @message.txt -H 'Content-Type: application/octet-stream' 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&subject=hello'
+$ curl -is -XPOST --data-binary @message.txt -H 'Content-Type: application/octet-stream' 'https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=fee598d5942add552e561c00ab79e5b15258ff8277161d1ed028227c43fd00bc&amp;subject=hello'
 
 HTTP/1.1 200 OK
 Server: nginx
@@ -263,191 +260,12 @@ a lot easier
           </div>
           <footer>
                 <p>POST without a body parameter.</p>
-            <a href="#stats" class="button button-big">See some stats</a>
+            <a href="#tool" class="button button-big">Or just use the tool</a>
           </footer>
         </article>
       </div>
-
 
       <div class="wrapper wrapper-style2">
-        <article id="stats">
-          <header>
-            <h2>stats</h2>
-            <span>Use the id and admin token to view subscription statistics</span>
-          </header>
-          <div class="container">
-
-             <div class="row half">
-                <div class="12u">
-                <section class="box box-style1">
-<pre class="brush: bash;">
-$ curl -is 'https://api.baggage.io/stats/e098cde48b3564c0a83eaad6b37b0da0?token=38cf6bb64cbbaffb30fcb75e48a05872297579de1ac57744ac9677f3a32eda3d'
-
-HTTP/1.1 200 OK
-Server: nginx
-Date: Mon, 07 Apr 2014 13:35:59 GMT
-Content-Type: application/json;charset=utf-8
-Content-Length: 218
-Connection: keep-alive
-X-Content-Type-Options: nosniff
-
-{"message":"stats","stats":{"email":"you@domain.com","name":"baggage.io","created":"2014-04-07 10:48:18 +0100","updated":"2014-04-07 12:49:36 +0100","sent_count":1,"subscriber_ip":"127.0.0.1","last_admin_ip":"127.0.0.1","last_sender_ip":"127.0.0.1","ttl":604797}}
-</pre>
-                </section>
-              </div>
-            </div>
-          </div>
-          <footer>
-                <p>No email is sent when retrieving stats.</p>
-            <a href="#rotate" class="button button-big">Change the tokens</a>
-          </footer>
-        </article>
-      </div>
-
-      <div class="wrapper wrapper-style3">
-        <article id="rotate">
-          <header>
-            <h2>rotate</h2>
-            <span>Use the id and admin token to change the tokens at any time</span>
-          </header>
-          <div class="container">
-
-             <div class="row half">
-                <div class="12u">
-                <section class="box box-style1">
-<pre class="brush: bash;">
-$ curl -is 'https://api.baggage.io/rotate/e098cde48b3564c0a83eaad6b37b0da0?token=38cf6bb64cbbaffb30fcb75e48a05872297579de1ac57744ac9677f3a32eda3d'
-
-HTTP/1.1 200 OK
-Server: nginx
-Date: Mon, 07 Apr 2014 13:35:59 GMT
-Content-Type: application/json;charset=utf-8
-Content-Length: 21
-Connection: keep-alive
-X-Content-Type-Options: nosniff
-
-{"message":"rotated"}
-</pre>
-                </section>
-              </div>
-            </div>
-
-             <div class="row half">
-                <div class="12u">
-                <section class="box box-style1">
-<pre class="brush: bash;">
-From: "baggage.io" &lt;no-reply@baggage.io&gt;
-To: you@domain.com
-Subject: Your new baggage.io tokens
-
-Hi,
-
-Your tokens have been rotated. The new values are:
-
-id:              e098cde48b3564c0a83eaad6b37b0da0
-email token:     c59fa1717438edaecc6c6b08082e77e297ff566632954b38966e68d94185a1d3
-admin token:     b0b3239fe21b4113733fb88fab5dabefb21e1ad2891ebb97c258665359583854
-
-Use to the email token to send emails and use the admin token to rotate the tokens or unsubscribe.·
-
-Please keep the admin token safe.
-
-
-Sending a message:
-
-https://api.baggage.io/send/e098cde48b3564c0a83eaad6b37b0da0?token=c59fa1717438edaecc6c6b08082e77e297ff566632954b38966e68d94185a1d3&subject=hello&body=world
-
-
-Retrieve subscription statistics:
-
-https://api.baggage.io/stats/e098cde48b3564c0a83eaad6b37b0da0?token=b0b3239fe21b4113733fb88fab5dabefb21e1ad2891ebb97c258665359583854
-
-
-To change your tokens:
-
-https://api.baggage.io/rotate/e098cde48b3564c0a83eaad6b37b0da0?token=b0b3239fe21b4113733fb88fab5dabefb21e1ad2891ebb97c258665359583854
-
-
-To unsubscribe:
-
-https://api.baggage.io/unsubscribe/e098cde48b3564c0a83eaad6b37b0da0?token=b0b3239fe21b4113733fb88fab5dabefb21e1ad2891ebb97c258665359583854
-
-
-Your subscription will expire after 7 days of inactivity.
-
-Regards,
-baggage.io
-</pre>
-                </section>
-              </div>
-            </div>
-
-          </div>
-          <footer>
-                <p>The id stays the same.</p>
-            <a href="#unsubscribe" class="button button-big">All done?</a>
-          </footer>
-        </article>
-      </div>
-
-
-
-      <div class="wrapper wrapper-style2">
-        <article id="unsubscribe">
-          <header>
-            <h2>unsubscribe</h2>
-            <span>Use the id and admin token to unsubscribe</span>
-          </header>
-          <div class="container">
-
-             <div class="row half">
-                <div class="12u">
-                <section class="box box-style1">
-<pre class="brush: bash;">
-curl -is 'http://api.baggage.io/unsubscribe/e098cde48b3564c0a83eaad6b37b0da0?token=b0b3239fe21b4113733fb88fab5dabefb21e1ad2891ebb97c258665359583854'
-
-HTTP/1.1 200 OK
-Server: nginx
-Date: Mon, 07 Apr 2014 13:37:20 GMT
-Content-Type: application/json;charset=utf-8
-Content-Length: 26
-Connection: keep-alive
-X-Content-Type-Options: nosniff
-
-{"message":"unsubscribed"}
-</pre>
-                </section>
-              </div>
-            </div>
-
-             <div class="row half">
-                <div class="12u">
-                <section class="box box-style1">
-<pre class="brush: bash;">
-From: "baggage.io" &lt;no-reply@baggage.io&gt;
-To: you@domain.com
-Subject: baggage.io e098cde48b3564c0a83eaad6b37b0da0 unsubscribed
-
-Hi,
-
-e098cde48b3564c0a83eaad6b37b0da0 has been unsubscribed. Thank you.
-
-Regards,
-baggage.io
-</pre>
-                </section>
-              </div>
-            </div>
-
-          </div>
-          <footer>
-                <p>The subscription will also expire after 7 days inactivity (configurable).</p>
-            <a href="#cli" class="button button-big">Or just use the tool</a>
-          </footer>
-        </article>
-      </div>
-
-      <div class="wrapper wrapper-style3">
         <article id="tool">
           <header>
             <h2>command line tool</h2>
@@ -489,22 +307,23 @@ $ ./baggage help
 
           </div>
           <footer>
-                <p>Copy it to /usr/bin/ for even more convinience.</p>
-            <a href="#more" class="button button-big">Want to know more?</a>
+                <p>Copy it to /usr/bin/ for even more convenience.</p>
+            <a href="#docs" class="button button-big">Read the docs</a>
           </footer>
         </article>
       </div>
 
       <div class="wrapper wrapper-style4">
-        <article id="more" class="container small">
+        <article id="docs" class="container small">
           <header>
-            <h2>find out more</h2>
-            <span>API documentation and source code is available on <a href="https://github.com/baggage/app">GitHub</a></span>
+            <h2>documentation</h2>
+            <span>Full API documentation and source code is available on <a href="https://github.com/baggage/app">GitHub</a></span><br/>
+            <span>Command line tool help is available <a href="https://github.com/baggage/cli">here</a></span>
           </header>
             <div class="row">
               <div class="12u">
                 <hr />
-                <h3>Like the service?</h3>
+                <h3>like the service?</h3>
                 <ul class="social">
                   <li class="twitter"><a href="https://twitter.com/intent/tweet?url=http://baggage.io&via=zeroXten&text=A%20free%20and%20simple%20web-to-email%20gateway" class="fa fa-twitter"><span>Twitter</span></a></li>
                   <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://baggage.io" class="fa fa-facebook"><span>Facebook</span></a></li>
@@ -532,6 +351,7 @@ $ ./baggage help
               </div>
             </div>
           <footer>
+            <p><a href="mailto:help@baggage.io">help@baggage.io</a></p>
             <ul id="copyright">
               <li>&copy; 2014 baggage.io</li>
               <li>Logo: <a href="http://www.iconarchive.com/show/happy-holidays-icons-by-robsonbillponte/Case-icon.html">robsonbillponte</a></li>
